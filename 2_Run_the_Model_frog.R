@@ -5,12 +5,14 @@ jags.data <- list( x = dat,
                    nSurveys = ncol(dat))
 
 Ninit <- apply(dat, 1, max, na.rm=TRUE)
-
+#I have some sites which were not sampled as often as others, so there are NA values at those surveys.  Added the "na.rm=TRUE" to account for this so that the Max value refers to the max value and not the NA.
 
 inits <- function(){list(lambda = runif(1, 0, 10),
                          p = runif(1, 0, 1),
                          N = Ninit
 )}
+
+
 
 #------- Parameters monitored
 
