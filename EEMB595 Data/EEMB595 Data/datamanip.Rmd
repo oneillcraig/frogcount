@@ -1,0 +1,143 @@
+---
+title: "EEMB595 Data Cleanup"
+author: "Craig"
+date: "June 4, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Library and Packages
+
+```{r}
+library(tidyverse)
+library(reshape2)
+```
+
+##Bringing in the Data
+
+```{r}
+
+frogsurvey <- read_csv("~/2018 Spring/EEMB595 Data/KnappSurveyData/KnappsYLFData.csv")
+
+frogsurvey1764 <- frogsurvey %>% 
+  filter(site == 1764)
+
+write.csv(frogsurvey1764, file = "frogsurvey1764.csv", sep = ",")
+
+frogsurvey228 <- frogsurvey %>% 
+  filter(site == 228)
+write.csv(frogsurvey228, file = "frogsurvey228.csv", sep = ",")
+
+frogsurvey490 <- frogsurvey %>% 
+  filter(site == 490)
+write.csv(frogsurvey490, file = "frogsurvey490.csv", sep = ",")
+frogsurvey727 <- frogsurvey %>% 
+  filter(site == 727)
+write.csv(frogsurvey727, file = "frogsurvey727.csv", sep = ",")
+frogsurvey1634 <- frogsurvey %>% 
+  filter(site == 1634)
+write.csv(frogsurvey1634, file = "frogsurvey1634.csv", sep = ",")
+frogsurvey2045 <- frogsurvey %>% 
+  filter(site == 2045)
+write.csv(frogsurvey2045, file = "frogsurvey2045.csv", sep = ",")
+
+frogsurvcomb <- rbind(frogsurvey1764, frogsurvey228, frogsurvey490, frogsurvey727, frogsurvey1634, frogsurvey1970)
+
+frogsurvcomb1 <- frogsurvcomb %>% 
+  group_by(site, year, survey) %>% 
+  summarize(n())
+
+surv <- read_csv("~/2018 Spring/EEMB595 Data/KnappSurveyData/surveycountperyear.csv")
+surv <- surv %>% 
+  filter(year == 1)
+
+year1 <- surv %>% 
+  filter(year == 1) %>% 
+  select(site, adult, water, date, surv)
+year2<- surv %>% 
+  filter(year == 2)%>% 
+  select(site, adult, water, date, surv)
+year3<- surv %>% 
+  filter(year == 3)%>% 
+  select(site, adult, water, date, surv)
+year4<- surv %>% 
+  filter(year == 4)%>% 
+  select(site, adult, water, date, surv)
+year5<- surv %>% 
+  filter(year == 5)%>% 
+  select(site, adult, water, date, surv)
+year6<- surv %>% 
+  filter(year == 6)%>% 
+  select(site, adult, water, date, surv)
+year7<- surv %>% 
+  filter(year == 7)%>% 
+  select(site, adult, water, date, surv)
+year8<- surv %>% 
+  filter(year == 8)%>% 
+  select(site, adult, water, date, surv)
+year9<- surv %>% 
+  filter(year == 9)%>% 
+  select(site, adult, water, date, surv)
+year10<- surv %>% 
+  filter(year == 10)%>% 
+  select(site, adult, water, date, surv)
+year11<- surv %>% 
+  filter(year == 11)%>% 
+  select(site, adult, water, date, surv)
+year12<- surv %>% 
+  filter(year == 12)%>% 
+  select(site, adult, water, date, surv)
+year13<- surv %>% 
+  filter(year == 13)%>% 
+  select(site, adult, water, date, surv)
+year14<- surv %>% 
+  filter(year == 14)%>% 
+  select(site, adult, water, date, surv)
+year15<- surv %>% 
+  filter(year == 15)%>% 
+  select(site, adult, water, date, surv)
+year16<- surv %>% 
+  filter(year == 16)%>% 
+  select(site, adult, water, date, surv)
+year17<- surv %>% 
+  filter(year == 17)%>% 
+  select(site, adult, water, date, surv)
+year18<- surv %>% 
+  filter(year == 18)%>% 
+  select(site, adult, water, date, surv)
+year19<- surv %>% 
+  filter(year == 19)%>% 
+  select(site, adult, water, date, surv)
+year20<- surv %>% 
+  filter(year == 20)%>% 
+  select(site, adult, water, date, surv)
+
+#year1g <- year1 %>% 
+#  group_by(site) %>% 
+#  summarize(n()) %>% 
+#  mutate(survey = n())
+
+year1m <- melt(year1g, id=c("site"))
+
+year1 <- year1 %>% 
+  select(site, adult, surv)
+yearReshape <- reshape(year1, v.names = "adult", idvar = "site", timevar = "surv", direction = "wide")
+
+yearmelt <- melt(year1, id=c("site", "surv"))
+
+
+
+indoWide <- reshape(Indometh, v.names = "conc", idvar = "Subject", timevar = "time", direction = "wide")
+
+year1sum <- year1 %>% 
+  group_by(site) %>% 
+  summarize(n())
+
+
+  
+  
+```
+
