@@ -1,4 +1,4 @@
-dat <- read.csv("year15totna.csv")[,-1]
+dat <- read.csv("basspond.csv")[,-1]
 
 jags.data <- list( x = dat,
                    nSites = nrow(dat),
